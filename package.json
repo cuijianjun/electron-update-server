@@ -1,0 +1,29 @@
+{
+  "name": "electron-update-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local release server for the Windows and UOS Electron skeletons",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24.22.0 <25"
+  },
+  "packageManager": "npm@11.19.1",
+  "scripts": {
+    "start": "node src/cli.cjs serve",
+    "init:local": "node src/cli.cjs init-local",
+    "publish:full": "node src/cli.cjs publish-full",
+    "publish:resources": "node src/cli.cjs publish-resources",
+    "service:install": "node src/cli.cjs install-service",
+    "test": "node --test --test-concurrency=1 test/*.test.cjs",
+    "test:clients": "node --test --test-concurrency=1 test/client-integration.cjs"
+  },
+  "dependencies": {
+    "express": "4.22.2",
+    "js-yaml": "4.3.2",
+    "semver": "7.8.6"
+  },
+  "devDependencies": {
+    "electron-updater": "6.8.11",
+    "builder-util": "26.16.0"
+  }
+}

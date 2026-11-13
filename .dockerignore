@@ -1,0 +1,10 @@
+.git
+node_modules
+*.pem
+*.key
+.env*
+data
+_codex
+test
+specs
+*.log
