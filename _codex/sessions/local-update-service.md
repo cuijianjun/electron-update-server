@@ -1,9 +1,9 @@
-# 本机更新服务交付 — 2026-11-14
-目标：本机常驻server支持两client全量/签名增量，key/config初始化，测试后3repo GitHub。
-Server /Users/cjjxw/study/yz/electron-update-server，工作agent/update-server-main，空基线9e0b700；GitHub私有cuijianjun/electron-update-server已创建，首次源码推main并保留工作分支。两client仍agent/vue3-upgrade-main，原代码基线不改写；最终回执以git log/远端ref为准。
-本机LaunchAgent com.cjjxw.electron-update-server正在运行127.0.0.1:25565，healthz返回ok；配置~/.config/electron-update-server/config.json；keys每项目独立Ed25519、目录700/private600，私钥禁止Git，已有client trust必须保留原key；新部署重配需显式--new-deployment。
-Data/logs/baselines ~/.local/share/electron-update-server永久保留；profile~/Library/LaunchAgents/com.cjjxw.electron-update-server.plist。Win x64/UOS x64+arm64完整包及签名renderer1.0.0已发布；同版本无更新正常，三个目标真实full Range/资源signature+SHA256已过。仅同机，未部署公网/未新增UOS目标机认证。
-Client改动：公钥+本机URL模板、expandUpdateURL严格展开arch/platform/runtimeId、旧update:serve夹具和统一入口、测试禁用日常源。没有client依赖/锁变化。
-验证server12+真实client contract2通过；各client41unit+6e2e+HMR1。恢复prod后所有ASAR dist字节/信任配置/当前服务runtime一致。真实GDD大批multipart无fallback，abort/不可变/并发/签名/读写links/trust保护覆盖；隐藏data根403已修为basename+显式root，不放松safeFile/dotfiles。独立非实现者review闭环无阻塞。Docker compose config过，未build image；实际原生Node24.22.0/npm11.19.1。
-Source规格specs/001-local-update-service/tasks.md含详细回执；logs/tmp/electron-update-service-20261114可清理，中转包验收后清理；真实keys/data不能删。原VM仍suspended/pause-on，其他任务/参考repo/Codex历史不得动。
-GitHub创建由Chrome独立新窗口完成，不需要gh登录；SSH可推。push后在同窗口留一张仓库截图并关闭该窗口，原Feishu窗口不动，所有UI仅Cua。此卡不自记提交hash（防额外状态commit），查git实际状态再继续。
+# README 发布/更新/上线指南 — 2026-11-14
+目标：三个repo README写清打包/全量/增量、server部署配置，验证后GitHub；本轮不实际部署公网。
+Server /Users/cjjxw/study/yz/electron-update-server，agent/update-server-main@09a4704入场clean；同级win979c217/uosb1adf2e，均agent/vue3-upgrade-main clean。只改各README和既有card，不改业务/依赖/本地源/版本/密钥。
+文档完成：Linux Docker+宿主Nginx HTTPS部署，原public config/data迁移(私钥留发布机)，UID与只读mount，SSH暂存后CLI发布，三目标元数据/Range/签名归档验收，服务管理/备份/修复发高版本；client文档含所有构建与基线命令。
+本批验证：3份README的shell/JSON/代码围栏/本地链接/diff-check通过；URL脚本在隔离config验证HTTPS/拒绝HTTP/保留公钥和占位符，server配置迁移及compose插值通过，npm version在scratch同步package+lock通过。server12test+动态client contract2新执行通过；README Nginx模板在临时可信测试CA/TLS代理下，三目标metadata/HEAD/single+multiRange/资源签名与ZIP hash通过；21005字节Range头500片段保序通过。临时Nginx已停止，日常服务未变。Docker只验证compose，未build/run image；未部署公网或执行新目标机安装。
+复核修复：固定1.0.0 E2E/packaged限制明确，升版本后改用动态联调+实际目标机验收；新基线按project/platform-arch/runtime/version隔离并保存manifest，原1.0.0旧布局不搬动。公网切换保留原trust，旧localhost客户端需首次新安装/手改公开配置；两发布事务独立。
+本机deployment保留：LaunchAgent com.cjjxw.electron-update-server，127.0.0.1:25565；config/keys ~/.config/electron-update-server(独立Ed25519)，data/log/旧基线 ~/.local/share/electron-update-server。3目标1.0.0已发布；服务和key/data不可删。
+历史各client41unit/6e2e/HMR1/3包HTTP不冒充本轮新测；UOS001 T017/T022/T023未闭。新临时验证/tmp/electron-update-readme-20261114可清理；原VM/其他任务/Codex历史不动。
+独立只读review完成，无剩余阻塞；已修复两项文档问题并加专用shell失败即停。各repo一个docs commit并SSH推既有工作分支；server main仍为09a4704时可快进同步，最终结果查git log/status/ls-remote，不记自引用hash，不改写历史。Node24.22.0/npm11.19.1子进程PATH。
